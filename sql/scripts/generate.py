@@ -5,7 +5,7 @@ import string
 
 
 def generate_dummy_inserts(table_name, columns):
-    num_inserts = 100  # Number of INSERT statements to generate
+    num_inserts = 10000  # Number of INSERT statements to generate
     insert_template = "INSERT INTO {} ({}) VALUES ({})"
 
     # Generate INSERT statements
