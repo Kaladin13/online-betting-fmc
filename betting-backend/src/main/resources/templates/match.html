@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Match Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* Custom styles for team names */
+        .team-name {
+            color: #007BFF; /* Blue color, you can change this to any color you prefer */
+            font-weight: bold;
+        }
+
+        /* Custom styles for match status badge */
+        .badge {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .badge-success {
+            background-color: #28A745; /* Green color for success */
+            color: #fff; /* White text */
+        }
+
+        .badge-danger {
+            background-color: #DC3545; /* Red color for danger */
+            color: #fff; /* White text */
+        }
+
+        /* Custom styles for ID */
+        #matchId {
+            font-size: 20px; /* Increase font size */
+            color: #FF5733; /* Orange color, you can change this to any color you prefer */
+            font-weight: bold;
+        }
+
+        /* Custom styles for the container */
+        .match-details-container {
+            background-color: #2f3237; /* Dark color for the container */
+            border-radius: 10px; /* Rounded corners */
+            padding: 15px;
+            margin-bottom: 20px;
+            width: auto;
+            color: #fff; /* White text */
+        }
+
+        .bid-event {
+            border: 4px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .bid-event-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #111123; /* Make bidEvent.name stand out with gold color */
+        }
+
+        .bid-event-status {
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .bid {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Match info</h1>
+
+<div th:if="${matchEntity != null}">
+    <div class="match-details-container">
+        <div>
+            <strong>ID:</strong> <span id="matchId" th:text="${matchEntity.id}"></span>
+        </div>
+        <div>
+            <strong>Teams:</strong>
+            <span class="team-name" th:text="${'Team ' + matchEntity.getLTeam()}"></span>
+            <span> VS </span>
+            <span class="team-name" th:text="${'Team ' + matchEntity.getRTeam()}"></span>
+        </div>
+        <div th:if="${matchEntity.getBestOf() != null}">
+            <strong>Number of rounds:</strong> <span th:text="${matchEntity.getBestOf()}"></span>
+        </div>
+        <div th:if="${matchEntity.getStartedAt() != null}">
+            <strong>Started At:</strong> <span th:text="${matchEntity.getStartedAt().toString()}"></span>
+        </div>
+        <div th:if="${matchEntity.getEndedAt() != null}">
+            <strong>Ended At:</strong> <span th:text="${matchEntity.getEndedAt().toString()}"></span>
+        </div>
+        <div th:if="${matchEntity.getStatus() != null}">
+            <strong>Status:</strong>
+            <span class="badge badge-success" th:text="${matchEntity.getStatus()}"></span>
+        </div>
+    </div>
+
+    <!--bid details-->
+    <div th:if="${matchEntity.bidEvents != null and not #lists.isEmpty(matchEntity.bidEvents)}">
+        <h2>Bid Events</h2>
+        <div th:each="bidEvent : ${matchEntity.bidEvents}" class="bid-event">
+            <div class="bid-event-header" th:text="${bidEvent.name}"></div>
+            <div>
+                <strong>Status:</strong> <span class="bid-event-status" th:text="${bidEvent.status}"></span>
+            </div>
+            <div th:if="${bidEvent.editedAt != null}">
+                <strong>Edited At:</strong> <span th:text="${bidEvent.editedAt.toString()}"></span>
+            </div>
+            <div th:if="${bidEvent.createdAt != null}">
+                <strong>Created At:</strong> <span th:text="${bidEvent.createdAt.toString()}"></span>
+            </div>
+
+            <!-- Render bids if available -->
+            <div th:if="${bidEvent.bids != null and not #lists.isEmpty(bidEvent.bids)}">
+                <h3>Bids</h3>
+                <div th:each="bid : ${bidEvent.bids}" class="bid">
+                    <!-- Display bid details here, adjust as needed -->
+                    <div>
+                        <strong>Bid ID:</strong> <span th:text="${bid.id}"></span>
+                    </div>
+                    <!-- Add more bid details as needed -->
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <form th:action="@{/create-user-bid}" method="post">
+                <input type="hidden" th:name="user_id" th:value="1"/>
+
+                <label for="bid_id">Bid id:</label>
+                <input type="text" id="bid_id" name="bid_id" />
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" />
+
+                <button type="submit">Сделать ставку</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div th:if="${matchEntity == null}">
+    <p>No match details available.</p>
+</div>
+
+</body>
+</html>

@@ -3,7 +3,7 @@ create table "user"
     id          bigserial primary key,
     login       varchar(255) unique not null,
     password    varchar(255)        not null,
-    referral_id bigint              not null references "user" (id),
+    referral_id bigint              references "user" (id),
     balance     numeric(14, 2)      not null,
     is_trusted  bool                not null,
     name        varchar(255),
