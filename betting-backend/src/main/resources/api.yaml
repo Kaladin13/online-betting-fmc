@@ -16,6 +16,20 @@ paths:
       responses:
         200:
           description: OK
-#  components:
-#    schemas:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pingResponse'
+
+
+
+components:
+  schemas:
+    pingResponse:
+      type: object
+      properties:
+        pong:
+          description: Password
+          type: string
+
 
