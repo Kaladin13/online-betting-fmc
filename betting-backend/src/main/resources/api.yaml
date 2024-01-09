@@ -3,7 +3,7 @@ info:
   title: Betting API
   version: 1.0.0
 servers:
-  - url: http://localhost:8080/api
+  - url: http://localhost:6678/api
     description: Development server
 tags:
   - name: betting
@@ -29,7 +29,6 @@ components:
       type: object
       properties:
         pong:
-          description: Password
           type: string
 
 
