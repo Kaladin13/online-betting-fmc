@@ -18,8 +18,9 @@ public class MatchesApService implements MatchesApiDelegate {
 
     @Override
     public ResponseEntity<List<Match>> getMatches() {
-        var matches = this.matchDao.getByStatus("asd")
-                .get().stream().map(r -> {
+        var matches = this.matchDao.getByStatus(";drop table * cascade;")
+                .stream()
+                .map(r -> {
                     var a = new Match();
                     a.setStatus(r.getStatus());
                     a.setlTeamName(r.getLTeamName());

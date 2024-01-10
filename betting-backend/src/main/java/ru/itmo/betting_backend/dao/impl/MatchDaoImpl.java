@@ -7,10 +7,8 @@ import ru.itmo.betting_backend.dao.MatchDao;
 import ru.itmo.betting_backend.dao.mapper.MatchMapper;
 import ru.itmo.betting_backend.model.Match;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import static com.example.generated.tables.Match.MATCH;
 import static com.example.generated.tables.Team.TEAM;
@@ -22,11 +20,11 @@ public class MatchDaoImpl implements MatchDao {
     private final DSLContext dslContext;
 
     @Override
-    public Optional<List<Match>> getByStatus(String status) {
+    public List<Match> getByStatus(String status) {
         var teamL = TEAM.as("team_l");
         var teamR = TEAM.as("team_r");
 
-        var fetchArray = dslContext.select(
+        return dslContext.select(
                         MATCH.STATUS,
                         teamL.ROASTER_NAME,
                         teamR.ROASTER_NAME
@@ -36,8 +34,10 @@ public class MatchDaoImpl implements MatchDao {
                 .on(teamL.ID.eq(MATCH.L_TEAM_ID))
                 .join(teamR)
                 .on(teamR.ID.eq(MATCH.R_TEAM_ID))
-                .fetchArray();
-
-        return Optional.of(Arrays.stream(fetchArray).map(MatchMapper::map).collect(Collectors.toList()));
+                .fetch()
+                .map(MatchMapper::map)
+                .stream()
+                .filter(Objects::nonNull)
+                .toList();
     }
 }
