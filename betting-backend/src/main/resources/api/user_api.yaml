@@ -21,6 +21,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/matches'
+  /org:
+    get:
+      operationId: GetOrganisations
+      tags:
+        - orgs
+        - mainPage
+      responses:
+        200:
+          description: Get organisations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organisations'
   /ping:
     get:
       operationId: ping
@@ -57,6 +70,21 @@ paths:
 
 components:
   schemas:
+    organisation:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        logoUrl:
+          type: string
+        region:
+          type: string
+    organisations:
+      type: array
+      items:
+        $ref: '#/components/schemas/organisation'
     match:
       type: object
       properties:
