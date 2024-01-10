@@ -167,7 +167,7 @@
                             <!-- Конфигурация пакетов -->
                             <apiPackage>ru.itmo.betting_backend.api</apiPackage>
                             <modelPackage>ru.itmo.betting_backend.model</modelPackage>
-                            <invokerPackage>ru.itmo.generated.invoker</invokerPackage>
+                            <invokerPackage>ru.itmo.betting_backend</invokerPackage>
                             <configOptions>
                                 <delegatePattern>true</delegatePattern>
                             </configOptions>

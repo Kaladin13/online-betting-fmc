@@ -1,4 +1,4 @@
-package ru.itmo.betting_backend.api;
+package ru.itmo.betting_backend;
 
 import com.zaxxer.hikari.HikariDataSource;
 import liquibase.integration.spring.SpringLiquibase;
