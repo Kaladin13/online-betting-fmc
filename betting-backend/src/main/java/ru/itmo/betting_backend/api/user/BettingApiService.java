@@ -1,11 +1,11 @@
-package ru.itmo.betting_backend.api;
+package ru.itmo.betting_backend.api.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import ru.itmo.betting_backend.dao.DisciplineDao;
-import ru.itmo.betting_backend.model.PingResponse;
+import ru.itmo.betting_backend.model.user.PingResponse;
 
 @Component
 @RequiredArgsConstructor

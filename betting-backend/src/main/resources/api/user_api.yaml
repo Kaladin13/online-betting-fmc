@@ -3,7 +3,7 @@ info:
   title: Betting API
   version: 1.0.0
 servers:
-  - url: http://localhost:6678/api
+  - url: http://localhost:6678/api/user
     description: Development server
 tags:
   - name: betting
