@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.springframework.stereotype.Repository;
 import ru.itmo.betting_backend.dao.DisciplineDao;
 import ru.itmo.betting_backend.dao.mapper.DisciplineMapper;
 import ru.itmo.betting_backend.model.Discipline;
@@ -11,6 +12,7 @@ import ru.itmo.betting_backend.model.Discipline;
 import static com.example.generated.tables.Discipline.DISCIPLINE;
 
 @RequiredArgsConstructor
+@Repository
 public class DisciplineDaoImpl implements DisciplineDao {
 
     private final DSLContext dslContext;
