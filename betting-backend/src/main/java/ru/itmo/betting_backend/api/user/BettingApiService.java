@@ -13,7 +13,17 @@ public class BettingApiService implements PingApiDelegate {
 
     private final DisciplineDao disciplineDao;
 
+
     @Override
+    public ResponseEntity<PingResponse> ping(String state) {
+        return PingApiDelegate.super.ping(state);
+    }
+
+    @Override
+    public ResponseEntity<PingResponse> pingPost(PingResponse pingResponse) {
+        return PingApiDelegate.super.pingPost(pingResponse);
+    }
+
     public ResponseEntity<PingResponse> ping() {
         return new ResponseEntity<>(
                 new PingResponse()

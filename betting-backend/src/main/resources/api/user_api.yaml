@@ -8,9 +8,41 @@ servers:
 tags:
   - name: betting
 paths:
+  /matches:
+    get:
+      operationId: GetMatches
+      tags:
+        - matches
+        - mainPage
+      responses:
+        200:
+          description: Get active matches
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/matches'
   /ping:
     get:
       operationId: ping
+      parameters:
+        - name: state
+          in: query
+          schema:
+            type: string
+      tags:
+        - betting
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pingResponse'
+
+    post:
+      operationId: pingPost
+      requestBody:
+        $ref: '#/components/requestBodies/PingBody'
       tags:
         - betting
       responses:
@@ -25,10 +57,29 @@ paths:
 
 components:
   schemas:
+    match:
+      type: object
+      properties:
+        lTeamName:
+          type: string
+        rTeamName:
+          type: string
+        status:
+          type: string
+    matches:
+      type: array
+      items:
+        $ref: '#/components/schemas/match'
     pingResponse:
       type: object
       properties:
         pong:
           type: string
+  requestBodies:
+    PingBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/pingResponse'
 
 
