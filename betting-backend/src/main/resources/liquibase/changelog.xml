@@ -9,5 +9,8 @@
     </preConditions>
 
     <include file="migration/tables.sql" relativeToChangelogFile="true"/>
+    <include file="migration/procedures.sql" relativeToChangelogFile="true"/>
+    <include file="migration/triggers.sql" relativeToChangelogFile="true"/>
+    <include file="migration/indexes.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
