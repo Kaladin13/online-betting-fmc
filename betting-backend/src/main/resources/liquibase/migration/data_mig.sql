@@ -21,5 +21,5 @@ INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES 
 INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (2, 'Зенит', 'oMJphfbb', 1);
 
 TRUNCATE TABLE match restart identity cascade;
-INSERT INTO match (l_team_id, r_team_id, tournament_id, best_of) VALUES (1, 2, 2, 2);
-INSERT INTO match (l_team_id, r_team_id, tournament_id, best_of) VALUES (3, 4, 1, 3);
+INSERT INTO match (l_team_id, r_team_id, tournament_id, best_of, status) VALUES (1, 2, 2, 2, 'второй раунд');
+INSERT INTO match (l_team_id, r_team_id, tournament_id, best_of, status) VALUES (3, 4, 1, 3, 'пенальти');

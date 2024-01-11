@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class MatchDaoImpl implements MatchDao {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Match> getByStatus(String status) {
+    public List<Match> getAll() {
         var teamL = TEAM.as("team_l");
         var teamR = TEAM.as("team_r");
 
@@ -34,7 +35,8 @@ public class MatchDaoImpl implements MatchDao {
                         MATCH.ID,
                         MATCH.STATUS,
                         teamL.ROASTER_NAME,
-                        teamR.ROASTER_NAME
+                        teamR.ROASTER_NAME,
+                        MATCH.TOURNAMENT_ID
                 )
                 .from(MATCH)
                 .join(teamL)
@@ -46,6 +48,28 @@ public class MatchDaoImpl implements MatchDao {
                 .stream()
                 .filter(Objects::nonNull)
                 .toList();
+    }
+
+    @Override
+    public Optional<Match> getById(Long id) {
+        var teamL = TEAM.as("team_l");
+        var teamR = TEAM.as("team_r");
+
+        return dslContext.select(
+                        MATCH.ID,
+                        MATCH.STATUS,
+                        teamL.ROASTER_NAME,
+                        teamR.ROASTER_NAME,
+                        MATCH.TOURNAMENT_ID
+                )
+                .from(MATCH)
+                .join(teamL)
+                .on(teamL.ID.eq(MATCH.L_TEAM_ID))
+                .join(teamR)
+                .on(teamR.ID.eq(MATCH.R_TEAM_ID))
+                .where(MATCH.ID.eq(id))
+                .fetchOptional()
+                .map(MatchMapper::map);
     }
 
     @Override

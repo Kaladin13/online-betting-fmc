@@ -18,7 +18,7 @@ public class MatchesApService implements MatchesApiDelegate {
 
     @Override
     public ResponseEntity<List<Match>> getMatches() {
-        var matches = this.matchDao.getByStatus(";drop table * cascade;")
+        var matches = this.matchDao.getAll()
                 .stream()
                 .map(MatchMapper::mapToApiModel)
                 .toList();

@@ -12,7 +12,7 @@ paths:
     get:
       operationId: GetMainPage
       tags:
-        - pages
+        - user_pages
       responses:
         200:
           description: OK
@@ -20,6 +20,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/mainPage'
+
+  /match-page/{match_id}:
+    get:
+      operationId: GetMatchPage
+      tags:
+        - user_pages
+      parameters:
+        - name: match_id
+          description: match-id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
 
   /matches:
     put:
