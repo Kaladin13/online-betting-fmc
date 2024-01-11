@@ -1,5 +1,9 @@
 package ru.itmo.betting_backend.dao.mapper;
 
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
+
 import com.example.generated.tables.records.TournamentRecord;
 import lombok.experimental.UtilityClass;
 import org.jooq.Record;
@@ -32,5 +36,26 @@ public class TournamentMapper {
                 tournament.getStartedAt(),
                 tournament.getEndedAt()
         );
+    }
+
+    public static ru.itmo.betting_backend.model.user.Tournament mapToApi(Tournament tournament) {
+        return new ru.itmo.betting_backend.model.user.Tournament()
+                .id(tournament.getId())
+                .name(tournament.getName())
+                .startedAt(Optional.ofNullable(tournament.getStartedAt())
+                        .map(Objects::toString)
+                        .orElse(null)
+                )
+                .endedAt(Optional.ofNullable(tournament.getEndedAt())
+                        .map(Objects::toString)
+                        .orElse(null)
+                )
+                .matches(
+                        Optional.ofNullable(tournament.getMatches())
+                                .orElse(new ArrayList<>())
+                                .stream()
+                                .map(MatchMapper::mapToApiModel)
+                                .toList()
+                );
     }
 }
