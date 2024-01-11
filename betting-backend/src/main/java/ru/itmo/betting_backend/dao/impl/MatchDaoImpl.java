@@ -8,9 +8,12 @@ import ru.itmo.betting_backend.dao.MatchDao;
 import ru.itmo.betting_backend.dao.mapper.MatchMapper;
 import ru.itmo.betting_backend.model.Match;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.example.generated.tables.Match.MATCH;
 import static com.example.generated.tables.Team.TEAM;
@@ -46,7 +49,35 @@ public class MatchDaoImpl implements MatchDao {
     }
 
     @Override
-    public List<Match> getAllByTournamentIds(Set<Long> tournamentIds) {
-        return null;
+    public Map<Long, List<Match>> getAllByTournamentIds(Set<Long> tournamentIds) {
+        var teamL = TEAM.as("team_l");
+        var teamR = TEAM.as("team_r");
+        return dslContext.select(
+                        MATCH.ID,
+                        MATCH.STATUS,
+                        teamL.ROASTER_NAME,
+                        teamR.ROASTER_NAME
+                )
+                .from(MATCH)
+                .join(teamL)
+                .on(teamL.ID.eq(MATCH.L_TEAM_ID))
+                .join(teamR)
+                .on(teamR.ID.eq(MATCH.R_TEAM_ID))
+                .where(MATCH.TOURNAMENT_ID.in(tournamentIds))
+                .fetch()
+                .map(MatchMapper::map)
+                .stream()
+                .collect(Collectors.toMap(
+                        m -> m.getTournament().getId(),
+                        m -> {
+                            List<Match> matches = new ArrayList<>();
+                            matches.add(m);
+                            return matches;
+                        },
+                        (f, s) -> {
+                            f.addAll(s);
+                            return f;
+                        }
+                ));
     }
 }
