@@ -21,6 +21,6 @@ public class Discipline {
     @Nullable
     private Boolean isCyberSport;
 
-    //TODO fill
+    @Nullable
     private List<Tournament> tournaments;
 }

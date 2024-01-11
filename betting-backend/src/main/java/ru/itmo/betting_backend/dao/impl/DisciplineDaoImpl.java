@@ -1,5 +1,6 @@
 package ru.itmo.betting_backend.dao.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,19 @@ public class DisciplineDaoImpl implements DisciplineDao {
                 .from(DISCIPLINE)
                 .where(DISCIPLINE.ID.eq(id))
                 .fetchOptional()
+                .map(DisciplineMapper::map);
+    }
+
+    @Override
+    public List<Discipline> getAll() {
+        return dslContext.select(
+                        DISCIPLINE.ID,
+                        DISCIPLINE.NAME,
+                        DISCIPLINE.LOGO_URL,
+                        DISCIPLINE.IS_CYBERSPORT
+                )
+                .from(DISCIPLINE)
+                .fetch()
                 .map(DisciplineMapper::map);
     }
 }

@@ -17,7 +17,6 @@ public class Tournament {
 
     private String logoUrl;
 
-    // TODO delete
     private Discipline discipline;
 
     @Nullable
@@ -26,6 +25,6 @@ public class Tournament {
     @Nullable
     private OffsetDateTime endedAt;
 
-    // TODO add matches
+    @Nullable
     private List<Match> matches;
 }

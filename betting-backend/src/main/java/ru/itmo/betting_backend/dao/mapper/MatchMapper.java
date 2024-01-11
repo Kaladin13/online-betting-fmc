@@ -23,7 +23,7 @@ public class MatchMapper {
         a.setStatus(match.getStatus());
         a.setlTeamName(match.getLTeam());
         a.setrTeamName(match.getRTeam());
-
+        a.setId(match.getId());
         return a;
     }
 }

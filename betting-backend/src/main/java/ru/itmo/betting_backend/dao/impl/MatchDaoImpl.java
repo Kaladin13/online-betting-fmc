@@ -10,6 +10,7 @@ import ru.itmo.betting_backend.model.Match;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.example.generated.tables.Match.MATCH;
 import static com.example.generated.tables.Team.TEAM;
@@ -27,6 +28,7 @@ public class MatchDaoImpl implements MatchDao {
         var teamR = TEAM.as("team_r");
 
         return dslContext.select(
+                        MATCH.ID,
                         MATCH.STATUS,
                         teamL.ROASTER_NAME,
                         teamR.ROASTER_NAME
@@ -41,5 +43,10 @@ public class MatchDaoImpl implements MatchDao {
                 .stream()
                 .filter(Objects::nonNull)
                 .toList();
+    }
+
+    @Override
+    public List<Match> getAllByTournamentIds(Set<Long> tournamentIds) {
+        return null;
     }
 }

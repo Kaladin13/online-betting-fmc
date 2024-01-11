@@ -1,7 +1,12 @@
 package ru.itmo.betting_backend.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
@@ -46,5 +51,34 @@ public class TournamentDaoImpl implements TournamentDao {
                         .map(TournamentMapper::unmap)
                         .toList()
         ).execute();
+    }
+
+    @Override
+    public Map<Long, List<Tournament>> getAllByDisciplineIds(Set<Long> disciplineIds) {
+        return dslContext.select(
+                        TOURNAMENT.ID,
+                        TOURNAMENT.NAME,
+                        TOURNAMENT.LOGO_URL,
+                        TOURNAMENT.STARTED_AT,
+                        TOURNAMENT.ENDED_AT,
+                        TOURNAMENT.DISCIPLINE_ID
+                )
+                .from(TOURNAMENT)
+                .where(TOURNAMENT.DISCIPLINE_ID.in(disciplineIds))
+                .fetch()
+                .map(TournamentMapper::map)
+                .stream()
+                .collect(Collectors.toMap(
+                        t -> t.getDiscipline().getId(),
+                        t -> {
+                            List<Tournament> list = new ArrayList<>();
+                            list.add(t);
+                            return list;
+                        },
+                        (f, s) -> {
+                            f.addAll(s);
+                            return f;
+                        }
+                ));
     }
 }
