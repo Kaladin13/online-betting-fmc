@@ -3,6 +3,7 @@ package ru.itmo.betting_backend.dao.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.betting_backend.dao.MatchDao;
 import ru.itmo.betting_backend.dao.mapper.MatchMapper;
 import ru.itmo.betting_backend.model.Match;
@@ -20,6 +21,7 @@ public class MatchDaoImpl implements MatchDao {
     private final DSLContext dslContext;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Match> getByStatus(String status) {
         var teamL = TEAM.as("team_l");
         var teamR = TEAM.as("team_r");

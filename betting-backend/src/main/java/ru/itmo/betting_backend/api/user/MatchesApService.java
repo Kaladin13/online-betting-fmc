@@ -25,4 +25,9 @@ public class MatchesApService implements MatchesApiDelegate {
 
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Void> addMatches(List<Match> match) {
+        return MatchesApiDelegate.super.addMatches(match);
+    }
 }

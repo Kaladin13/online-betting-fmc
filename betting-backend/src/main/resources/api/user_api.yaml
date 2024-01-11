@@ -9,6 +9,19 @@ tags:
   - name: betting
 paths:
   /matches:
+    put:
+      operationId: AddMatches
+      tags:
+        - matches
+        - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/matches'
+      responses:
+        200:
+          description: OK
     get:
       operationId: GetMatches
       tags:
@@ -138,4 +151,8 @@ components:
           schema:
             $ref: '#/components/schemas/balanceTicket'
 
+
+#bid, discipline, org, tournament
+# [discipline] <- [tournament] <- [match] --- /main-page
+# [match] <- [bid_event] <- [bid]
 

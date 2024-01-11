@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.betting_backend.dao.OrganisationDao;
 import ru.itmo.betting_backend.dao.mapper.OrganisationMapper;
 import ru.itmo.betting_backend.model.Org;
@@ -20,6 +21,7 @@ public class OrganisationImpl implements OrganisationDao {
     private final DSLContext dslContext;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Org> getOrgs() {
         return dslContext.select()
                 .from(ORGANISATION)

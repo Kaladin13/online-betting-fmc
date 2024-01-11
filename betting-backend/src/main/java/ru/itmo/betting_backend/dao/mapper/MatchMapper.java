@@ -12,16 +12,17 @@ public class MatchMapper {
 
     public static Match map(Record record) {
         return new Match()
+                .setId(record.get(MATCH.ID))
                 .setStatus(record.get(MATCH.STATUS))
-                .setLTeamName(record.get(TEAM.as("team_l").ROASTER_NAME))
-                .setRTeamName(record.get(TEAM.as("team_r").ROASTER_NAME));
+                .setLTeam(record.get(TEAM.as("team_l").ROASTER_NAME))
+                .setRTeam(record.get(TEAM.as("team_r").ROASTER_NAME));
     }
 
     public static ru.itmo.betting_backend.model.user.Match mapToApiModel(Match match) {
         var a = new ru.itmo.betting_backend.model.user.Match();
         a.setStatus(match.getStatus());
-        a.setlTeamName(match.getLTeamName());
-        a.setrTeamName(match.getRTeamName());
+        a.setlTeamName(match.getLTeam());
+        a.setrTeamName(match.getRTeam());
 
         return a;
     }

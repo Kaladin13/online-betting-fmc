@@ -1,26 +1,22 @@
 package ru.itmo.betting_backend.model;
 
-
-import java.util.List;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.lang.Nullable;
 
 @Data
 @Accessors(chain = true)
-public class Discipline {
+public class Team {
 
     private Long id;
 
-    private String name;
+    @Nullable
+    private String roasterName;
 
     @Nullable
-    private String logoUrl;
+    private String roasterLogoUrl;
 
-    @Nullable
-    private Boolean isCyberSport;
+    private Discipline discipline;
 
-    //TODO fill
-    private List<Tournament> tournaments;
+    private Org org;
 }
