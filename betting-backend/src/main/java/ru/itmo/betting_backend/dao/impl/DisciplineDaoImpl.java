@@ -46,4 +46,14 @@ public class DisciplineDaoImpl implements DisciplineDao {
                 .fetch()
                 .map(DisciplineMapper::map);
     }
+
+    @Override
+    public void persist(Discipline discipline) {
+        dslContext.insertInto(DISCIPLINE)
+                .set(DISCIPLINE.ID, discipline.getId())
+                .set(DISCIPLINE.NAME, discipline.getName())
+                .set(DISCIPLINE.LOGO_URL, discipline.getLogoUrl())
+                .set(DISCIPLINE.IS_CYBERSPORT, discipline.getIsCyberSport())
+                .execute();
+    }
 }

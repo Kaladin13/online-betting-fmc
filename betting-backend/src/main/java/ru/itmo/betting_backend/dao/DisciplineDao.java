@@ -10,4 +10,6 @@ public interface DisciplineDao {
     Optional<Discipline> getById(Long id);
 
     List<Discipline> getAll();
+
+    void persist(Discipline discipline);
 }

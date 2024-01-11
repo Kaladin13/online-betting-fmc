@@ -232,7 +232,7 @@ components:
             $ref: '#/components/schemas/balanceTicket'
 
 
-#bid, discipline, org, tournament
+# bid, discipline, org, tournament
 # [discipline] <- [tournament] <- [match] --- /main-page
 # [match] <- [bid_event] <- [bid]
 

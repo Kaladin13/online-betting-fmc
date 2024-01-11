@@ -26,7 +26,7 @@ public class BidDaoImpl implements BidDao {
     @Transactional(readOnly = true)
     public Map<Long, List<Bid>> getAllBidsByEventId(Set<Long> eventsIds) {
         return dslContext.selectFrom(BIDS)
-                .where(BIDS.ID.in(eventsIds))
+                .where(BIDS.EVENT_ID.in(eventsIds))
                 .fetch()
                 .map(BidMapper::map)
                 .stream()
