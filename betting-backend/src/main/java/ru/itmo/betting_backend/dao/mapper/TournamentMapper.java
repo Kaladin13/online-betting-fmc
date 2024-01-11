@@ -21,8 +21,18 @@ public class TournamentMapper {
                 .setId(record.get(TOURNAMENT.ID))
                 .setName(record.get(TOURNAMENT.NAME))
                 .setLogoUrl(record.get(TOURNAMENT.LOGO_URL))
-                .setDiscipline(record.get(DISCIPLINE.ID) != null ?
+                .setDiscipline(record.get(DISCIPLINE.NAME) != null ?
                         DisciplineMapper.map(record) : new Discipline().setId(record.get(TOURNAMENT.DISCIPLINE_ID)))
+                .setStartedAt(record.get(TOURNAMENT.STARTED_AT))
+                .setEndedAt(record.get(TOURNAMENT.ENDED_AT));
+    }
+
+    public static Tournament mapWithOutDiscipline(Record record) {
+        return new Tournament()
+                .setId(record.get(TOURNAMENT.ID))
+                .setName(record.get(TOURNAMENT.NAME))
+                .setLogoUrl(record.get(TOURNAMENT.LOGO_URL))
+                .setDiscipline(new Discipline().setId(record.get(TOURNAMENT.DISCIPLINE_ID)))
                 .setStartedAt(record.get(TOURNAMENT.STARTED_AT))
                 .setEndedAt(record.get(TOURNAMENT.ENDED_AT));
     }

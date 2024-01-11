@@ -56,7 +56,8 @@ public class MatchDaoImpl implements MatchDao {
                         MATCH.ID,
                         MATCH.STATUS,
                         teamL.ROASTER_NAME,
-                        teamR.ROASTER_NAME
+                        teamR.ROASTER_NAME,
+                        MATCH.TOURNAMENT_ID
                 )
                 .from(MATCH)
                 .join(teamL)

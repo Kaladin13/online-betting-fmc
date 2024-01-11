@@ -66,7 +66,7 @@ public class TournamentDaoImpl implements TournamentDao {
                 .from(TOURNAMENT)
                 .where(TOURNAMENT.DISCIPLINE_ID.in(disciplineIds))
                 .fetch()
-                .map(TournamentMapper::map)
+                .map(TournamentMapper::mapWithOutDiscipline)
                 .stream()
                 .collect(Collectors.toMap(
                         t -> t.getDiscipline().getId(),

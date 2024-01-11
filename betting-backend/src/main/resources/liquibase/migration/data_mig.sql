@@ -15,12 +15,11 @@ INSERT INTO organisation (name, logo_url, region) VALUES ('Дотеры', 'по�
 INSERT INTO organisation (name, logo_url, region) VALUES ('Футболисты мира', 'kuku.com', '77');
 
 TRUNCATE TABLE team restart identity cascade;
-INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (100, 'NXsLsrEV', 'oMJphfbb', 89);
-INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (100, 'NXsLsrEV', 'oMJphfbb', 89);
-INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (100, 'NXsLsrEV', 'oMJphfbb', 89);
-INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (100, 'NXsLsrEV', 'oMJphfbb', 89);
+INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (1, 'Virstus.pro', 'virtus.com', 2);
+INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (1, 'BetBoom Team', 'BetBoom.ru', 2);
+INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (2, 'Манчестер', 'oMJphfbb', 1);
+INSERT INTO team (org_id, roaster_name, roaster_logo_url, discipline_id) VALUES (2, 'Зенит', 'oMJphfbb', 1);
 
 TRUNCATE TABLE match restart identity cascade;
-INSERT INTO match (l_team_id, r_team_id, tournament_id) VALUES (96, 39, 36);
-INSERT INTO match (l_team_id, r_team_id, tournament_id) VALUES (96, 39, 36);
-INSERT INTO match (l_team_id, r_team_id, tournament_id) VALUES (96, 39, 36);
+INSERT INTO match (l_team_id, r_team_id, tournament_id, best_of) VALUES (1, 2, 2, 2);
+INSERT INTO match (l_team_id, r_team_id, tournament_id, best_of) VALUES (3, 4, 1, 3);

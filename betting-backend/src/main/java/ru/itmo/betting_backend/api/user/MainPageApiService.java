@@ -1,11 +1,9 @@
 package ru.itmo.betting_backend.api.user;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -46,8 +44,8 @@ public class MainPageApiService implements MainPageApiDelegate {
         for (var discipline : disciplines) {
             var tournamentsByOneDiscipline = Optional.ofNullable(tournamentsByDisciplineId.get(discipline.getId()))
                     .orElse(new ArrayList<>());
-            discipline.setTournaments(tournaments);
-            tournamentsByOneDiscipline.addAll(tournaments);
+            discipline.setTournaments(tournamentsByOneDiscipline);
+            tournaments.addAll(tournamentsByOneDiscipline);
         }
 
         Map<Long, List<Match>> matchesByTournamentId = matchDao.getAllByTournamentIds(
