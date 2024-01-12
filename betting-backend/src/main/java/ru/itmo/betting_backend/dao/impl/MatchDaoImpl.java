@@ -51,6 +51,7 @@ public class MatchDaoImpl implements MatchDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Match> getById(Long id) {
         var teamL = TEAM.as("team_l");
         var teamR = TEAM.as("team_r");

@@ -3,6 +3,7 @@ package ru.itmo.betting_backend.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,5 +43,14 @@ public class BidDaoImpl implements BidDao {
                             return f;
                         }
                 ));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Bid> getById(Long id) {
+        return dslContext.selectFrom(BIDS)
+                .where(BIDS.ID.eq(id))
+                .fetchOptional()
+                .map(BidMapper::map);
     }
 }
