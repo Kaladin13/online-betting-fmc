@@ -1,6 +1,7 @@
 --liquibase formatted sql
 
 --changeset rusilee:add_data runInTransaction:false runOnChange:true
+TRUNCATE TABLE "user_bids" restart identity cascade;
 TRUNCATE TABLE discipline restart identity cascade;
 
 INSERT INTO discipline (name, logo_url, is_cybersport) VALUES ('Футбол', 'football.com', FALSE);
@@ -44,5 +45,3 @@ INSERT INTO bids (event_id, name, rate, status) VALUES (2, 'OVhfwyYr', 55.318, '
 TRUNCATE TABLE "user" restart identity cascade;
 INSERT INTO "user" (login, password, balance, is_trusted, name, surname, email, passport)
 VALUES ('ePibHKDi', 'qzmgkNXz', 43.12, False, 'tyUyuMfl', 'yRuBefYr', 'XhVBESLv', 'DcNdGDyS');
-
-TRUNCATE TABLE "user_bids" restart identity cascade;

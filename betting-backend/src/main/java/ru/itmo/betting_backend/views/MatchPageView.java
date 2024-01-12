@@ -75,6 +75,6 @@ public class MatchPageView {
 
         userBidDao.persist(userBid);
 
-        return "index";
+        return "redirect:/main-page";
     }
 }
