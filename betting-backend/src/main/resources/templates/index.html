@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+<div th:each="discipline, disciplineIndex: ${disciplines}">
+    <div th:id="${'tableHeader_' + disciplineIndex.index}" th:onclick="'toggleTable(' + ${disciplineIndex.index} + ')'">
+        <h2 th:id="${'tableName_' + disciplineIndex.index}" th:text="${discipline.getName() + '▲'}"></h2>
+    </div>
+    <div th:id="${'dataTable_' + disciplineIndex.index}" style="display: none;">
+        <table class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Logo</th>
+                <th>Start time</th>
+                <th>Most anticipated</th>
+                <th>Most active</th>
+                <th>Recommended</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tournament : ${discipline.getTournaments()}">
+                <td th:text="${tournament.getName()}"/>
+                <td>
+                    <img th:src="${tournament.getLogoUrl()}" alt="Tournament Logo"
+                         style="max-width: 100px; max-height: 100px;">
+                </td>
+                <td th:text="${tournament.getStartedAt()}"/>
+                <td>
+                    <a th:href="'/match?id=' + ${tournament.getMatches()[0].getId()}" class="btn btn-primary">
+                        <span th:text="${tournament.getMatches()[0].getStatus()}"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="'/match?id=' + ${tournament.getMatches()[1].getId()}" class="btn btn-primary">
+                        <span th:text="${tournament.getMatches()[1].getStatus()}"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="'/match?id=' + ${tournament.getMatches()[2].getId()}" class="btn btn-primary">
+                        <span th:text="${tournament.getMatches()[2].getStatus()}"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function toggleTable(index) {
+        var table = document.getElementById('dataTable_' + index);
+        let nn = document.getElementById('tableName_' + index);
+        if (table.style.display === 'none') {
+            table.style.display = 'block';
+            let cf = nn.innerHTML
+            nn.innerHTML = cf.slice(0, -1) + '▼';
+        } else {
+            table.style.display = 'none';
+            let cf = nn.innerHTML
+            nn.innerHTML = cf.slice(0, -1) + '▲';
+        }
+    }
+
+    /*]]>*/
+</script>
+
+</body>
+</html>

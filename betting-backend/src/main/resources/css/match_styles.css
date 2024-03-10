@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+strong {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Custom styles for team names */
+.team-name {
+    color: #007BFF; /* Blue color, you can change this to any color you prefer */
+    font-weight: bold;
+}
+
+/* Custom styles for match status badge */
+.badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.badge-success {
+    background-color: #28A745; /* Green color for success */
+    color: #fff; /* White text */
+}
+
+.badge-danger {
+    background-color: #DC3545; /* Red color for danger */
+    color: #fff; /* White text */
+}
